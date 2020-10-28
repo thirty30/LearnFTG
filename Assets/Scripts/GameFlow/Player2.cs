@@ -25,6 +25,11 @@ public class Player2 : Player
 
     protected override void BattleControl()
     {
+        float v = Input.GetAxis("Vertical");
+        this.Ani.SetFloat("vertical", v);
+        float h = Input.GetAxis("Horizontal");
+        this.Ani.SetFloat("horizontal", h);
+
         Vector3 oppoDir = Main.GetSingleton().Player1.Avatar.transform.forward.normalized;
         if (Input.GetKey(KeyCode.LeftArrow) == true)
         {
@@ -49,6 +54,23 @@ public class Player2 : Player
                 return;
             }
             this.Avatar.transform.position += Vector3.right * ConstData.MoveSpeed * Time.deltaTime;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) == true)
+        {
+            this.Ani.SetTrigger("jump");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2) == true)
+        {
+            this.Ani.SetTrigger("boxing1");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3) == true)
+        {
+            this.Ani.SetTrigger("kick1");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4) == true)
+        {
+            this.Ani.SetTrigger("fireball");
         }
     }
 

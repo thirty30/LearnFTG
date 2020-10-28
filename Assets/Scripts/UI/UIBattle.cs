@@ -41,15 +41,6 @@ public class UIBattle : MonoBehaviour
         this.ReFreshPlayer2Info();
         this.UpdateTimeAndRound();
         this.CheckDead();
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            Main.GetSingleton().Player1.HP -= 0.3f;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            Main.GetSingleton().Player2.HP -= 0.3f;
-        }
     }
 
     private void ReFreshPlayer1Info()

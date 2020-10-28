@@ -11,6 +11,11 @@ public class Player1 : Player
         this.Avatar.transform.forward = new Vector3(1, 0, 0);
     }
 
+    protected override void BattleUpdate()
+    {
+        this.Avatar.transform.LookAt(Main.GetSingleton().Player2.Avatar.transform.position);
+    }
+
     protected override void SelectCharacter()
     {
         if (Input.GetKeyDown(KeyCode.A) == true)
@@ -25,6 +30,12 @@ public class Player1 : Player
 
     protected override void BattleControl()
     {
+        float v = Input.GetAxis("Vertical");
+        this.Ani.SetFloat("vertical", v);
+        float h = Input.GetAxis("Horizontal");
+        this.Ani.SetFloat("horizontal", h);
+
+
         Vector3 oppoDir = Main.GetSingleton().Player2.Avatar.transform.forward.normalized;
         if (Input.GetKey(KeyCode.A) == true)
         {
@@ -49,6 +60,23 @@ public class Player1 : Player
                 return;
             }
             this.Avatar.transform.position += Vector3.right * ConstData.MoveSpeed * Time.deltaTime;
+        }
+
+        if (Input.GetButtonDown("Jump") == true)
+        {
+            this.Ani.SetTrigger("jump");
+        }
+        if (Input.GetButtonDown("Fire1") == true)
+        {
+            this.Ani.SetTrigger("boxing1");
+        }
+        if (Input.GetButtonDown("Fire2") == true)
+        {
+            this.Ani.SetTrigger("kick1");
+        }
+        if (Input.GetButtonDown("Fire3") == true)
+        {
+            this.Ani.SetTrigger("fireball");
         }
     }
 
