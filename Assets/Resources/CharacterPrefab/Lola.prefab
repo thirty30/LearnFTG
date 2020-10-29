@@ -15,6 +15,7 @@ MonoBehaviour:
   BoxingCollider: {fileID: 1812753636096957703}
   KickCollider: {fileID: 8493089382085346263}
   BodyCollider: {fileID: 8315429958192506459}
+  FireBallPrefab: {fileID: 8119816549947907581, guid: 4462d2dcfc68692409b60649018989ac, type: 3}
 --- !u!1 &1812753636096957703
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +182,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 1.8, z: 1}
+  m_Size: {x: 0.6, y: 1.8, z: 0.8}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8203669876308936833
 MonoBehaviour:

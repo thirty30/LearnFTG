@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 849525905652b0a46a071cde5078830a
+guid: b1049d55ef4d96246b320d6baefc5648
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable:
   - first:
-      74: 5631516573877651608
-    second: jumping
+      74: -203655887218126122
+    second: taunt
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: jumping
+      name: taunt
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 57
+      lastFrame: 132
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -64,9 +64,9 @@ ModelImporter:
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
-        intParameter: 1
+        intParameter: 6
         messageOptions: 0
-      - time: 0.8371212
+      - time: 0.70454544
         functionName: SetState
         data: 
         objectReferenceParameter: {instanceID: 0}

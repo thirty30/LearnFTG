@@ -21,7 +21,8 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: Event SetState has a time (2.133333) outside the clip's
+      valid range (0.000000..2.000000). It will never be fired
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -59,6 +60,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0
+        functionName: SetState
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 2
+        messageOptions: 0
       - time: 0.19090909
         functionName: StartBoxing
         data: 
@@ -68,6 +76,13 @@ ModelImporter:
         messageOptions: 0
       - time: 0.44790208
         functionName: EndBoxing
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.82954544
+        functionName: SetState
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

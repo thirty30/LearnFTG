@@ -2,15 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EPlayerState
+public enum EPlayerPhase
 {
     FREE,
     SELECT,
     BATTLE
 }
 
+public enum EPlayerState
+{
+    STAND,
+    JUMP,
+    BOXING,
+    KICK,
+    FIREBALL,
+    DEATH,
+    TAUNT,
+    CROUCH,
+}
+
 public class Player
 {
+    public EPlayerPhase Phase;
     public EPlayerState State;
     public int CharacterID;
 
@@ -20,7 +33,7 @@ public class Player
 
     public virtual void InitBattle()
     {
-        this.State = EPlayerState.BATTLE;
+        this.Phase = EPlayerPhase.BATTLE;
         string path;
         if (this.CharacterID == 1)
         {
@@ -38,11 +51,11 @@ public class Player
 
     public virtual void Update()
     {
-        if (this.State == EPlayerState.SELECT)
+        if (this.Phase == EPlayerPhase.SELECT)
         {
             this.SelectCharacter();
         }
-        else if (this.State == EPlayerState.BATTLE)
+        else if (this.Phase == EPlayerPhase.BATTLE)
         {
             this.Avatar.transform.GetChild(0).transform.localRotation = Quaternion.Euler(Vector3.zero);
             Vector3 pos = this.Avatar.transform.GetChild(0).transform.localPosition;
@@ -66,7 +79,7 @@ public class Player
 
     public void Clear()
     {
-        this.State = EPlayerState.FREE;
+        this.Phase = EPlayerPhase.FREE;
         GameObject.Destroy(this.Avatar);
     }
 
@@ -82,11 +95,13 @@ public class Player
         this.HP -= aHP;
         if (this.HP > 0)
         {
-            this.Ani.SetTrigger("block");
+            Main.GetSingleton().PlaySound("hurt");
+            this.Ani.Play("block");
         }
         else
         {
-            this.Ani.SetTrigger("death");
+            Main.GetSingleton().PlaySound("die");
+            this.Ani.Play("death");
         }
     }
 }

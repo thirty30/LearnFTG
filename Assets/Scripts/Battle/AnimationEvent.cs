@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class AnimationEvent : MonoBehaviour
 {
-    public GameObject BoxingCollider;
-    public GameObject KickCollider;
-    public GameObject BodyCollider;
+    public GameObject BoxingCollider;   //boxing atk
+    public GameObject KickCollider;     //kick atk
+    public GameObject BodyCollider;     //body use to take damage
+    public GameObject FireBallPrefab;
 
     public Player PlayerData;
 
@@ -35,5 +36,20 @@ public class AnimationEvent : MonoBehaviour
     public void EndKick()
     {
         this.KickCollider.gameObject.SetActive(false);
+    }
+
+    public void FireBall()
+    {
+        GameObject obj = GameObject.Instantiate(this.FireBallPrefab);
+        Vector3 pos = this.transform.position;
+        pos.y = 1.4f;
+        pos.x += this.PlayerData.Avatar.transform.forward.x * 1.6f;
+        obj.transform.position = pos;
+        obj.GetComponent<FireBall>().Dir = this.PlayerData.Avatar.transform.forward;
+    }
+
+    public void SetState(int aState)
+    {
+        this.PlayerData.State = (EPlayerState)aState;
     }
 }

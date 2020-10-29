@@ -30,53 +30,65 @@ public class Player1 : Player
 
     protected override void BattleControl()
     {
-        float v = Input.GetAxis("Vertical");
-        this.Ani.SetFloat("vertical", v);
-        float h = Input.GetAxis("Horizontal");
-        this.Ani.SetFloat("horizontal", h);
+        if (this.State == EPlayerState.STAND)
+        {
+            float v = Input.GetAxis("Vertical");
+            this.Ani.SetFloat("vertical", v);
+            float h = Input.GetAxis("Horizontal");
+            this.Ani.SetFloat("horizontal", h);
 
+            Vector3 oppoDir = Main.GetSingleton().Player2.Avatar.transform.forward.normalized;
+            //if (Input.GetKey(KeyCode.A) == true)
+            if (h < 0)
+            {
+                if (Vector3.left == oppoDir && this.CalcDis() >= ConstData.MaxDis)
+                {
+                    return;
+                }
+                if (this.Avatar.transform.position.x <= -ConstData.BorderLine)
+                {
+                    return;
+                }
+                this.Avatar.transform.position += Vector3.left * ConstData.MoveSpeed * Time.deltaTime;
+            }
+            if (h > 0)
+            {
+                if (Vector3.right == oppoDir && this.CalcDis() >= ConstData.MaxDis)
+                {
+                    return;
+                }
+                if (this.Avatar.transform.position.x >= ConstData.BorderLine)
+                {
+                    return;
+                }
+                this.Avatar.transform.position += Vector3.right * ConstData.MoveSpeed * Time.deltaTime;
+            }
 
-        Vector3 oppoDir = Main.GetSingleton().Player2.Avatar.transform.forward.normalized;
-        if (Input.GetKey(KeyCode.A) == true)
-        {
-            if (Vector3.left == oppoDir && this.CalcDis() >= ConstData.MaxDis)
+            if (Input.GetButtonDown("Fire1") == true)
             {
-                return;
+                Main.GetSingleton().PlaySound("hitvoice");
+                this.Ani.SetTrigger("boxing1");
             }
-            if (this.Avatar.transform.position.x <= -ConstData.BorderLine)
+            if (Input.GetButtonDown("Fire2") == true)
             {
-                return;
+                Main.GetSingleton().PlaySound("hitvoice");
+                this.Ani.SetTrigger("kick1");
             }
-            this.Avatar.transform.position += Vector3.left * ConstData.MoveSpeed * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.D) == true)
-        {
-            if (Vector3.right == oppoDir && this.CalcDis() >= ConstData.MaxDis)
+            if (Input.GetButtonDown("Fire3") == true)
             {
-                return;
+                Main.GetSingleton().PlaySound("hitvoice");
+                this.Ani.SetTrigger("fireball");
             }
-            if (this.Avatar.transform.position.x >= ConstData.BorderLine)
+            if (Input.GetKeyDown(KeyCode.J) == true)
             {
-                return;
+                Main.GetSingleton().PlaySound("lola_laugh");
+                this.Ani.SetTrigger("taunt");
             }
-            this.Avatar.transform.position += Vector3.right * ConstData.MoveSpeed * Time.deltaTime;
-        }
-
-        if (Input.GetButtonDown("Jump") == true)
-        {
-            this.Ani.SetTrigger("jump");
-        }
-        if (Input.GetButtonDown("Fire1") == true)
-        {
-            this.Ani.SetTrigger("boxing1");
-        }
-        if (Input.GetButtonDown("Fire2") == true)
-        {
-            this.Ani.SetTrigger("kick1");
-        }
-        if (Input.GetButtonDown("Fire3") == true)
-        {
-            this.Ani.SetTrigger("fireball");
+            if (Input.GetButtonDown("Jump") == true)
+            {
+                Main.GetSingleton().PlaySound("hitvoice");
+                this.Ani.SetTrigger("jump");
+            }
         }
     }
 

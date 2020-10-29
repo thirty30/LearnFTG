@@ -15,14 +15,16 @@ public class Main : MonoBehaviour
     public UIController UIMgr;
     public Player Player1;
     public Player Player2;
+    public AudioSource SoundAS;
 
 
     private EGameState GameState;
-
+    private Dictionary<string, AudioClip> mAudioDic;
 
     // Start is called before the first frame update
     void Start()
     {
+        this.InitAudio();
         this.Player1 = new Player1();
         this.Player2 = new Player2();
         this.SetState(EGameState.SPLASH);
@@ -47,8 +49,8 @@ public class Main : MonoBehaviour
         {
             case EGameState.SPLASH:
                 {
-                    this.Player1.State = EPlayerState.FREE;
-                    this.Player2.State = EPlayerState.FREE;
+                    this.Player1.Phase = EPlayerPhase.FREE;
+                    this.Player2.Phase = EPlayerPhase.FREE;
 
                     this.UIMgr.HideAllNodes();
                     this.UIMgr.SplashNode.SetActive(true);
@@ -57,8 +59,8 @@ public class Main : MonoBehaviour
                 break;
             case EGameState.SELECT:
                 {
-                    this.Player1.State = EPlayerState.SELECT;
-                    this.Player2.State = EPlayerState.SELECT;
+                    this.Player1.Phase = EPlayerPhase.SELECT;
+                    this.Player2.Phase = EPlayerPhase.SELECT;
                     this.Player1.CharacterID = 1;
                     this.Player2.CharacterID = 2;
 
@@ -83,5 +85,37 @@ public class Main : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void InitAudio()
+    {
+        this.mAudioDic = new Dictionary<string, AudioClip>();
+        var audios = Resources.LoadAll<AudioClip>("Audio");
+        foreach (var audio in audios)
+        {
+            this.mAudioDic.Add(audio.name, audio);
+        }
+    }
+
+    public void PlaySound(string a_strAudio)
+    {
+        AudioClip audio = null;
+        this.mAudioDic.TryGetValue(a_strAudio, out audio);
+        if (audio == null)
+        {
+            return;
+        }
+        this.SoundAS.loop = false;
+        this.SoundAS.PlayOneShot(audio);
+    }
+
+    public void StopSound()
+    {
+        this.SoundAS.Stop();
+    }
+
+    public void SetSoundVolume(float a_Volume)
+    {
+        this.SoundAS.volume = a_Volume;
     }
 }
