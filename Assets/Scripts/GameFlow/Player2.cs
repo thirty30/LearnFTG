@@ -13,64 +13,88 @@ public class Player2 : Player
 
     protected override void SelectCharacter()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow) == true)
+        float h = Input.GetAxis("Joystick2Horizontal");
+        
+        if (h < 0)
         {
             this.CharacterID = 1;
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow) == true)
+        if (h > 0)
         {
             this.CharacterID = 2;
+        }
+
+        if (Input.GetButtonDown("Joystick2Fire1") == true)
+        {
+            Main.GetSingleton().SetState(EGameState.BATTLE);
         }
     }
 
     protected override void BattleControl()
     {
-        float v = Input.GetAxis("Vertical");
-        this.Ani.SetFloat("vertical", v);
-        float h = Input.GetAxis("Horizontal");
-        this.Ani.SetFloat("horizontal", h);
+        if (this.State == EPlayerState.STAND)
+        {
+            float h = Input.GetAxis("Joystick2Horizontal");
+            this.Ani.SetFloat("horizontal", h);
 
-        Vector3 oppoDir = Main.GetSingleton().Player1.Avatar.transform.forward.normalized;
-        if (Input.GetKey(KeyCode.LeftArrow) == true)
-        {
-            if (Vector3.left == oppoDir && this.CalcDis() >= ConstData.MaxDis)
-            {
-                return;
-            }
-            if (this.Avatar.transform.position.x <= -ConstData.BorderLine)
-            {
-                return;
-            }
-            this.Avatar.transform.position += Vector3.left * ConstData.MoveSpeed * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.RightArrow) == true)
-        {
-            if (Vector3.right == oppoDir && this.CalcDis() >= ConstData.MaxDis)
-            {
-                return;
-            }
-            if (this.Avatar.transform.position.x >= ConstData.BorderLine)
-            {
-                return;
-            }
-            this.Avatar.transform.position += Vector3.right * ConstData.MoveSpeed * Time.deltaTime;
-        }
+            float v = Input.GetAxis("Joystick2Vertical");
+            this.Ani.SetFloat("vertical", v);
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) == true)
-        {
-            this.Ani.SetTrigger("jump");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2) == true)
-        {
-            this.Ani.SetTrigger("boxing1");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3) == true)
-        {
-            this.Ani.SetTrigger("kick1");
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4) == true)
-        {
-            this.Ani.SetTrigger("fireball");
+            Vector3 oppoDir = Main.GetSingleton().Player1.Avatar.transform.forward.normalized;
+            if (h > 0)
+            {
+                if (Vector3.left == oppoDir && this.CalcDis() >= ConstData.MaxDis)
+                {
+                    return;
+                }
+                if (this.Avatar.transform.position.x <= -ConstData.BorderLine)
+                {
+                    return;
+                }
+                this.Avatar.transform.position += Vector3.left * ConstData.MoveSpeed * Time.deltaTime;
+            }
+            if (h < 0)
+            {
+                if (Vector3.right == oppoDir && this.CalcDis() >= ConstData.MaxDis)
+                {
+                    return;
+                }
+                if (this.Avatar.transform.position.x >= ConstData.BorderLine)
+                {
+                    return;
+                }
+                this.Avatar.transform.position += Vector3.right * ConstData.MoveSpeed * Time.deltaTime;
+            }
+
+            if (Input.GetButtonDown("Joystick2Fire1") == true)
+            {
+                Main.GetSingleton().PlaySound("hitvoice");
+                this.Ani.SetTrigger("boxing1");
+            }
+
+            if (Input.GetButtonDown("Joystick2Fire2") == true)
+            {
+                Main.GetSingleton().PlaySound("hitvoice");
+                this.Ani.SetTrigger("kick1");
+            }
+
+            if (Input.GetButtonDown("Joystick2Fire3") == true)
+            {
+                Main.GetSingleton().PlaySound("hitvoice");
+                this.Ani.SetTrigger("fireball");
+            }
+
+            if (Input.GetButtonDown("Joystick2Taunt") == true)
+            {
+                Main.GetSingleton().PlaySound("atienza_laugh");
+                this.Ani.SetTrigger("taunt");
+            }
+
+            if (Input.GetButtonDown("Joystick2Jump") == true)
+            {
+                Main.GetSingleton().PlaySound("hitvoice");
+                this.Ani.SetTrigger("jump");
+            }
         }
     }
 

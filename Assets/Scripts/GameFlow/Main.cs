@@ -45,6 +45,7 @@ public class Main : MonoBehaviour
 
     private void UpdateState()
     {
+        // game state machine
         switch (this.GameState)
         {
             case EGameState.SPLASH:

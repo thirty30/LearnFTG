@@ -73,6 +73,7 @@ public class Player
 
     public virtual void Reset()
     {
+        this.State = EPlayerState.STAND;
         this.Ani.Play("idle");
         this.HP = 1.0f;
     }

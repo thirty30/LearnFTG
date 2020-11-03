@@ -21,12 +21,6 @@ public class UISelect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Space) == true)
-        if (Input.GetButtonDown("Fire1") == true)
-        {
-            Main.GetSingleton().SetState(EGameState.BATTLE);
-        }
-        
         if (Main.GetSingleton().Player1.CharacterID == 1)
         {
             this.RedPlayer1.SetActive(true);

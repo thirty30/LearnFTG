@@ -17,13 +17,13 @@ public class CameraZoom : MonoBehaviour
 
         float x = (player1.Avatar.transform.position.x + player2.Avatar.transform.position.x) / 2;
         float dis = Vector3.Distance(player1.Avatar.transform.position, player2.Avatar.transform.position);
-        if (dis <= 6)
+        if (dis <= 6) //mim distance
         {
             this.transform.position = new Vector3(x, 1.5f, -4);
             return;
         }
 
-        if (dis >= 12)
+        if (dis >= 12)  // max distance
         {
             this.transform.position = new Vector3(x, 1.5f, -7);
             return;

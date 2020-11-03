@@ -4,10 +4,10 @@ public enum EGameState
     DEFAULT,
 
     WAIT,
-    SPLASH,
-    SELECT,
-    BATTLE,
-    RESULT,
+    SPLASH,     // main ui
+    SELECT,     // select player ui
+    BATTLE,     // in game
+    RESULT,     // win or lose ui
 }
 
 

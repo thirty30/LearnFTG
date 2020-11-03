@@ -11,19 +11,19 @@ public class DamageCollision : MonoBehaviour
         if (other.tag == "Boxing" && this.PlayerEvent.BoxingCollider != other.gameObject)
         {
             Main.GetSingleton().PlaySound("hit");
-            this.PlayerEvent.PlayerData.Hurt(0.17f);
+            this.PlayerEvent.PlayerData.Hurt(0.17f);    //different damage
         }
 
         if (other.tag == "Kick" && this.PlayerEvent.KickCollider != other.gameObject)
         {
             Main.GetSingleton().PlaySound("hit");
-            this.PlayerEvent.PlayerData.Hurt(0.23f);
+            this.PlayerEvent.PlayerData.Hurt(0.23f);    //different damage
         }
 
         if (other.tag == "FireBall")
         {
             Main.GetSingleton().PlaySound("hit");
-            this.PlayerEvent.PlayerData.Hurt(0.3f);
+            this.PlayerEvent.PlayerData.Hurt(0.3f); //different damage
         }
     }
 }

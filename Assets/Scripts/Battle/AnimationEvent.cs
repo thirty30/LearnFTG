@@ -43,7 +43,7 @@ public class AnimationEvent : MonoBehaviour
         GameObject obj = GameObject.Instantiate(this.FireBallPrefab);
         Vector3 pos = this.transform.position;
         pos.y = 1.4f;
-        pos.x += this.PlayerData.Avatar.transform.forward.x * 1.6f;
+        pos.x += this.PlayerData.Avatar.transform.forward.x * 2.0f;
         obj.transform.position = pos;
         obj.GetComponent<FireBall>().Dir = this.PlayerData.Avatar.transform.forward;
     }
